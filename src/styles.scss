@@ -1,0 +1,11 @@
+@import 'variables';
+@import 'theme/variables';
+@import '../node_modules/bootstrap/scss/mixins';
+@import 'theme/bootswatch';
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+
+
+body {
+  padding-top: 70px;
+}
