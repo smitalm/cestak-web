@@ -29,10 +29,10 @@ export class Bill {
 }
 export class Waypoint {
   id: number;
-  coordinates: LatLngLiteral;
+  coordinates: string;
   description: string;
 
-  constructor(fields?: { id?: number, coordinates?: LatLngLiteral, description?: string }) {
+  constructor(fields?: { id?: number, coordinates?: string, description?: string }) {
     if (fields != null) {
       this.id = fields.id;
       this.coordinates = fields.coordinates;

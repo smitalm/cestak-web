@@ -18,8 +18,8 @@
     <tr *ngFor="let trip of trips">
       <td>{{trip.id}}</td>
       <td>{{trip.startTime | date}}</td>
-      <td>{{trip.startLocation}}</td>
-      <td>{{trip.endLocation}}</td>
+      <td>{{trip.startLocation?.description}}</td>
+      <td>{{trip.endLocation?.description}}</td>
       <td>{{trip.distance}}</td>
       <td>{{trip.duration}}</td>
       <td>

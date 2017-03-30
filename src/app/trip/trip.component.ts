@@ -9,12 +9,13 @@ import * as toastr from 'toastr';
 @Component({
   selector: 'app-trip',
   templateUrl: './trip.component.html',
-  styleUrls: ['./trip.component.scss']
+  styleUrls: [ './trip.component.scss' ]
 })
 export class TripComponent implements OnInit {
   trips: Trip[] = [];
 
-  constructor(private api: ApiService, private modalService: NgbModal) { }
+  constructor(private api: ApiService, private modalService: NgbModal) {
+  }
 
   ngOnInit() {
     this.refresh();
@@ -27,7 +28,7 @@ export class TripComponent implements OnInit {
   }
 
   editTrip(trip) {
-    const modal = this.modalService.open(EditTripComponent);
+    const modal = this.modalService.open(EditTripComponent, { size: 'lg' });
     modal.componentInstance.trip = trip;
     modal.result
       .then(t => {
@@ -35,35 +36,38 @@ export class TripComponent implements OnInit {
           .then(() => toastr.success('Trip saved!'), () => toastr.error('Trip not saved!'))
           .then(() => this.refresh());
       })
-      .catch(() => {});
+      .catch(() => {
+      });
   }
 
   deleteTrip(trip) {
-    this.api.trips.create(trip).toPromise()
+    this.api.trips.remove(trip).toPromise()
       .then((deleted) => toastr.info(`trip deleted`), () => toastr.error('Trip not saved!'))
-      .catch(() => {});
+      .then(() => this.refresh());
   }
 
   addTrip() {
-    const modal = this.modalService.open(EditTripComponent);
+    const modal = this.modalService.open(EditTripComponent, { size: 'lg' });
     modal.result
       .then(t => {
         this.api.trips.create(t).toPromise()
           .then(() => toastr.success('Trip saved!'), () => toastr.error('Trip not saved!'))
           .then(() => this.refresh());
       })
-      .catch(() => {});
+      .catch(() => {
+      });
   }
 
   showOnMap() {
-    const modal = this.modalService.open(EditTripComponent);
+    const modal = this.modalService.open(EditTripComponent, { size: 'lg' });
     modal.result
       .then(t => {
         this.api.trips.create(t).toPromise()
           .then(() => toastr.success('Trip saved!'), () => toastr.error('Trip not saved!'))
           .then(() => this.refresh());
       })
-      .catch(() => {});
+      .catch(() => {
+      });
   }
 
 }

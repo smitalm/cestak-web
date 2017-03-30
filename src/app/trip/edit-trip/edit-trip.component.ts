@@ -25,6 +25,7 @@ export class EditTripComponent implements OnInit, OnChanges {
     } else {
       this.title = 'Edit trip';
     }
+    this.resetForm();
   }
 
   ngOnChanges() {
@@ -34,39 +35,42 @@ export class EditTripComponent implements OnInit, OnChanges {
   resetForm() {
     this.form.reset({
       startTime: this.trip.startTime,
-      // startLocation: {
-      //   coordinates: `${this.trip.startLocation.coordinates.lat},${this.trip.startLocation.coordinates.lng}`,
-      //   description: this.trip.startLocation.description
-      // },
+      startLocation: Object.assign({
+        coordinates: '',
+        description: ''
+      }, this.trip.startLocation || {}),
       endTime: this.trip.endTime,
-      // endLocation: {
-      //   coordinates: `${this.trip.endLocation.coordinates.lat},${this.trip.endLocation.coordinates.lng}`,
-      //   description: this.trip.endLocation.description
-      // },
+      endLocation: Object.assign({
+        coordinates: '',
+        description: ''
+      }, this.trip.endLocation || {}),
       distance: this.trip.distance,
       duration: this.trip.duration,
       transport: this.trip.transport
     });
   }
 
-  setModel() {
+  getModel() {
+    const model = Object.assign(new Trip(), this.trip);
     const formModel = this.form.value;
-    this.trip.startTime = new Date(formModel.startTime);
-    this.trip.startLocation = new Waypoint({
+    model.startTime = formModel.startTime;
+    model.startLocation = new Waypoint({
+      coordinates: 'TODO',
       description: formModel.startLocation.description
     });
-    this.trip.endTime = new Date(formModel.endTime);
-    this.trip.endLocation = new Waypoint({
-      description: formModel.startLocation.description
+    model.endTime = formModel.endTime;
+    model.endLocation = new Waypoint({
+      coordinates: 'TODO',
+      description: formModel.endLocation.description
     });
-    this.trip.distance = formModel.distance;
-    this.trip.duration = formModel.duration;
-    this.trip.transport = formModel.transport;
+    model.distance = formModel.distance;
+    model.duration = formModel.duration;
+    model.transport = formModel.transport;
+    return model;
   }
 
   confirm() {
-    this.setModel();
-    this.modal.close(this.trip);
+    this.modal.close(this.getModel());
   }
 
   dismiss() {
@@ -75,12 +79,12 @@ export class EditTripComponent implements OnInit, OnChanges {
 
   createForm() {
     this.form = this.fb.group({
-      startTime: [new Date(), Validators.required ],
+      startTime: ['', Validators.required ],
       startLocation: this.fb.group({
         coordinates: ['', Validators.required ],
         description: ['', Validators.required ]
       }),
-      endTime: [new Date(), Validators.required ],
+      endTime: ['', Validators.required ],
       endLocation: this.fb.group({
         coordinates: ['', Validators.required ],
         description: ['', Validators.required ]
