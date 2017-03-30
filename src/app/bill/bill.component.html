@@ -1,0 +1,23 @@
+<h2>Bills</h2>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Date</th>
+      <th>Location</th>
+      <th>Amount</th>
+      <th>Price</th>
+      <th>Fuel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let bill of bills">
+      <td>{{bill.id}}</td>
+      <td>{{bill.timestamp | date}}</td>
+      <td>{{bill.location}}</td>
+      <td>{{bill.amount}}</td>
+      <td>{{bill.price | currency}}</td>
+      <td>{{bill.fuel}}</td>
+    </tr>
+  </tbody>
+</table>

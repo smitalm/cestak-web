@@ -1,0 +1,33 @@
+<h2>Trips</h2>
+<p class="text-right">
+  <button class="btn btn-primary" (click)="addTrip()">New trip</button>
+</p>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Date</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Distance</th>
+      <th>Duration</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let trip of trips">
+      <td>{{trip.id}}</td>
+      <td>{{trip.startTime | date}}</td>
+      <td>{{trip.startLocation}}</td>
+      <td>{{trip.endLocation}}</td>
+      <td>{{trip.distance}}</td>
+      <td>{{trip.duration}}</td>
+      <td>
+        <button class="btn btn-outline-primary btn-sm" (click)="editTrip(trip)">Edit</button>
+        <button class="btn btn-outline-primary btn-sm" (click)="deleteTrip(trip)">Delete</button>
+        <button class="btn btn-outline-primary btn-sm" (click)="showOnMap(trip)">Map</button>
+      </td>
+    </tr>
+    <tr>
+  </tbody>
+</table>
