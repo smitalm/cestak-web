@@ -8,7 +8,7 @@ import { Bill } from '../api/api-model';
   styleUrls: ['./bill.component.scss']
 })
 export class BillComponent implements OnInit {
-  private bills: Bill[] = [];
+  bills: Bill[] = [];
 
   constructor(private api: ApiService) { }
 

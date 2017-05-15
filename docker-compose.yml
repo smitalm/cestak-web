@@ -1,0 +1,7 @@
+version: "2"
+services:
+  cestak-web:
+    build: .
+    image: cestak-web
+    ports:
+      - "4200:4200"
